@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form id="myForm" action="http://localhost:8088/_05_web/request1" method="GET">
+  用户名：<input type="text" name="username"><br/>
+  密码：<input type="password" name="password"><br/>
+  兴趣爱好：<input type="checkbox" name="hobby" value="cpp">cpp
+  <input type="checkbox" name="hobby" value="java">java
+  <input type="checkbox" name="hobby" value="go">go
+  <input type="submit"/>
+</form>
+</body>
+<script>
+  document.getElementById('myForm').addEventListener('submit', function (event) {
+    event.preventDefault() // 阻止表单提交的默认行为
+    const formData = new FormData(this) // 获取表单数据
+    const xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost:8088/_05_web/request1?' + new URLSearchParams(formData).toString(), true)
+    xhr.send()
+  })
+</script>
+</html>

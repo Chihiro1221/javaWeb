@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    <?xml version="1.0" encoding="utf-8" ?> xml文件的声明
+    version="1.0" version表示xml的版本
+    encoding="utf-8" encoding表示xml文件本身的编码格式
+-->
+<books>
+    <book sn="2213595911">
+        <name>活着</name>
+        <author>余华</author>
+        <price>78.5</price>
+    </book>
+    <book sn="2951945639">
+        <name>伞兵一号</name>
+        <author>卢本伟</author>
+        <price>9.9</price>
+    </book>
+</books>
