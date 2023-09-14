@@ -5,12 +5,13 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BaseDao {
+public abstract class BaseDao {
     private QueryRunner queryRunner = new QueryRunner();
 
     /**
@@ -18,7 +19,7 @@ public class BaseDao {
      *
      * @return -1表示更新失败，否则表示影响的行数
      */
-    public int update(String sql, Object... args) {
+    protected int update(String sql, Object... args) {
         Connection connection = JdbcUtils.getConnection();
         try {
             return queryRunner.update(connection, sql, args);
@@ -33,13 +34,14 @@ public class BaseDao {
 
     /**
      * 返回单个数据
+     *
      * @param type 实体类型
-     * @param sql sql语句
+     * @param sql  sql语句
      * @param args sql参数
-     * @return
      * @param <T>
+     * @return
      */
-    public <T> T queryForOne(Class<T> type, String sql, Object ...args) {
+    protected <T> T queryForOne(Class<T> type, String sql, Object... args) {
         Connection connection = JdbcUtils.getConnection();
         try {
             return queryRunner.query(connection, sql, new BeanHandler<T>(type), args);
@@ -53,14 +55,39 @@ public class BaseDao {
     }
 
     /**
-     * 返回多条数据
-     * @param type 实体类型
-     * @param sql sql语句
-     * @param args sql参数
+     * 执行返回一行一列的sql语句
+     *
+     * @param sql  执行的sql语句
+     * @param args sql对应的参数值
      * @return
-     * @param <T>
      */
-    public <T> List<T> queryForList(Class<T> type, String sql, Object args) {
+    public Object queryForSingleValue(String sql, Object... args) {
+
+        Connection conn = JdbcUtils.getConnection();
+
+        try {
+            Object obj = queryRunner.query(conn, sql, new ScalarHandler(), args);
+            int i = Integer.parseInt(String.valueOf(obj));
+            return i;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.close(conn);
+        }
+        return null;
+
+    }
+
+    /**
+     * 返回多条数据
+     *
+     * @param type 实体类型
+     * @param sql  sql语句
+     * @param args sql参数
+     * @param <T>
+     * @return
+     */
+    protected <T> List<T> queryForList(Class<T> type, String sql, Object... args) {
         Connection connection = JdbcUtils.getConnection();
         try {
             return queryRunner.query(connection, sql, new BeanListHandler<>(type), args);

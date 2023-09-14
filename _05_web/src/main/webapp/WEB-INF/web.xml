@@ -35,7 +35,7 @@
         <!-- 当访问http://ip:port/工程地址/hello的时候就会执行Servlet程序 -->
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>HelloServlet2</servlet-name>
         <servlet-class>com.example._05_web.HelloServlet2</servlet-class>
@@ -97,6 +97,43 @@
     <servlet-mapping>
         <servlet-name>Response2</servlet-name>
         <url-pattern>/response2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>com.example._05_web.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/UploadServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>com.example._05_web.DownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/downloadServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CookieServlet</servlet-name>
+        <servlet-class>com.study.test.CookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CookieServlet</servlet-name>
+        <url-pattern>/cookieServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.study.test.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

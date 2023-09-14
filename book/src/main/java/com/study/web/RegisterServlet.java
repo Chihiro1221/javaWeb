@@ -2,12 +2,15 @@ package com.study.web;
 
 import com.study.entity.User;
 import com.study.service.impl.UserServiceImpl;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 public class RegisterServlet extends HttpServlet {
     private UserServiceImpl userService = new UserServiceImpl();
