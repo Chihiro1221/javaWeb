@@ -19,11 +19,12 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         User user = userService.login(username, password);
         if (user != null) {
+            req.getSession().setAttribute("user", user);
             System.out.println("登录成功");
-            req.getRequestDispatcher("/pages/user/login_success.html").forward(req, resp);
+            req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         } else {
             System.out.println("登录失败");
-            req.getRequestDispatcher("/pages/user/login.html").forward(req, resp);
+            req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         }
     }
 }
